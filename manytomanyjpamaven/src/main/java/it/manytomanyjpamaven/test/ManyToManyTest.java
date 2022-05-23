@@ -1,6 +1,7 @@
 package it.manytomanyjpamaven.test;
 
 import java.util.Date;
+import java.util.List;
 
 import it.manytomanyjpamaven.dao.EntityManagerUtil;
 import it.manytomanyjpamaven.model.Ruolo;
@@ -37,6 +38,8 @@ public class ManyToManyTest {
 			System.out.println("In tabella Utente ci sono " + utenteServiceInstance.listAll().size() + " elementi.");
 			
 			testRimuovi(utenteServiceInstance);
+			
+			testFindAllCreatiAGiugno2022(utenteServiceInstance);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -162,6 +165,22 @@ public class ManyToManyTest {
 		}
 
 		System.out.println(".......testRimuovi fine: PASSED.............");
+		
+	}
+	
+	private static void testFindAllCreatiAGiugno2022(UtenteService utenteService) throws Exception{
+		
+		System.out.println(".......testFindAllCreatiAGiugno2022 inizio.............");
+		
+		@SuppressWarnings("deprecation")
+		Utente utentePerProva = new Utente("paolo.rossi", "pass", "paolo", "rossi", new Date(2022-1900, 5 , 22)); //questo date funziona in modi misteriosi
+		utenteService.inserisciNuovo(utentePerProva);
+		List<Utente> listaUtenti = utenteService.findAllCreatiAGiugno2022();
+		System.out.println(listaUtenti);
+		System.out.println(utenteService.findAllCreatiAGiugno2022());
+	
+
+		System.out.println(".......testFindAllCreatiAGiugno2022 fine: PASSED.............");
 		
 	}
 

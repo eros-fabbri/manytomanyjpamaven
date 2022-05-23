@@ -122,7 +122,7 @@ public class UtenteServiceImpl implements UtenteService {
 	public void rimuovi(Long idUtente) throws Exception {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 		utenteDAO.setEntityManager(entityManager);
-		if(utenteDAO.findByIdFetchingRuoli(idUtente).getRuoli() == null) {
+		if (utenteDAO.findByIdFetchingRuoli(idUtente).getRuoli() == null) {
 			throw new UtenteConRuoliAssociatiException("Questo utente ha dei ruoli associati");
 		}
 
@@ -141,8 +141,6 @@ public class UtenteServiceImpl implements UtenteService {
 		} finally {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
-		
-	
 
 	}
 
@@ -233,6 +231,43 @@ public class UtenteServiceImpl implements UtenteService {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 
+	}
+
+	@Override
+	public List<Utente> findAllCreatiAGiugno2022() throws Exception {
+
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			utenteDAO.setEntityManager(entityManager);
+
+			return utenteDAO.findAllCreatiAGiugno2022();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
+
+
+	@Override
+	public int countAllUtentiAdmin() throws Exception {
+
+		return 0;
+	}
+
+	@Override
+	public List<Utente> findAllPasswordMenoDi8Caratteri() throws Exception {
+
+		return null;
+	}
+
+	@Override
+	public boolean controllaSeAlmenoUnoAdminTraDisabilitati() throws Exception {
+
+		return false;
 	}
 
 }

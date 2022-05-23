@@ -253,9 +253,22 @@ public class UtenteServiceImpl implements UtenteService {
 
 
 	@Override
-	public int countAllUtentiAdmin() throws Exception {
+	public long countAllUtentiAdmin() throws Exception {
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
-		return 0;
+		try {
+			// uso l'injection per il dao
+			utenteDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			return utenteDAO.countAllUtentiAdmin();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	@Override

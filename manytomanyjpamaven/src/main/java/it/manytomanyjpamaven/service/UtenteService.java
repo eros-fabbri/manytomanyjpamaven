@@ -27,7 +27,7 @@ public interface UtenteService {
 
 	public List<Utente> findAllCreatiAGiugno2022() throws Exception;
 
-	public int countAllUtentiAdmin() throws Exception;
+	public long countAllUtentiAdmin() throws Exception;
 
 	public List<Utente> findAllPasswordMenoDi8Caratteri() throws Exception;
 

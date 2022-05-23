@@ -36,10 +36,12 @@ public class ManyToManyTest {
 
 			testRimuoviRuoloDaUtente(ruoloServiceInstance, utenteServiceInstance);
 			System.out.println("In tabella Utente ci sono " + utenteServiceInstance.listAll().size() + " elementi.");
-			
+
 			testRimuovi(utenteServiceInstance);
-			
+
 			testFindAllCreatiAGiugno2022(utenteServiceInstance);
+
+			testCountAllUtentiAdmin(utenteServiceInstance);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -144,7 +146,8 @@ public class ManyToManyTest {
 		if (!confermoRuoloPresente)
 			throw new RuntimeException("testRimuoviRuoloDaUtente fallito: utente e ruolo non associati ");
 
-		// ora provo la rimozione vera e propria ma poi forzo il caricamento per fare un confronto 'pulito'
+		// ora provo la rimozione vera e propria ma poi forzo il caricamento per fare un
+		// confronto 'pulito'
 		utenteServiceInstance.rimuoviRuoloDaUtente(utenteReloaded.getId(), ruoloEsistenteSuDb.getId());
 		utenteReloaded = utenteServiceInstance.caricaUtenteSingoloConRuoli(utenteNuovo.getId());
 		if (!utenteReloaded.getRuoli().isEmpty())
@@ -152,7 +155,7 @@ public class ManyToManyTest {
 
 		System.out.println(".......testRimuoviRuoloDaUtente fine: PASSED.............");
 	}
-	
+
 	private static void testRimuovi(UtenteService utenteService) throws Exception {
 		System.out.println(".......testRimuovi inizio.............");
 
@@ -160,28 +163,40 @@ public class ManyToManyTest {
 		utenteService.inserisciNuovo(utentePerProva);
 		System.out.println(utentePerProva.getRuoli());
 		utenteService.rimuovi(utentePerProva.getId());
-		if(utenteService.caricaSingoloElemento(utentePerProva.getId())!=null) {
+		if (utenteService.caricaSingoloElemento(utentePerProva.getId()) != null) {
 			throw new RuntimeException("testRimuovi fallito: utente non rimosso ");
 		}
 
 		System.out.println(".......testRimuovi fine: PASSED.............");
-		
+
 	}
-	
-	private static void testFindAllCreatiAGiugno2022(UtenteService utenteService) throws Exception{
-		
+
+	private static void testFindAllCreatiAGiugno2022(UtenteService utenteService) throws Exception {
+
 		System.out.println(".......testFindAllCreatiAGiugno2022 inizio.............");
-		
+
 		@SuppressWarnings("deprecation")
-		Utente utentePerProva = new Utente("paolo.rossi", "pass", "paolo", "rossi", new Date(2022-1900, 5 , 22)); //questo date funziona in modi misteriosi
+		Utente utentePerProva = new Utente("paolo.rossi", "pass", "paolo", "rossi", new Date(2022 - 1900, 5, 22)); // questo
+																													// date
+																													// funziona
+																													// in
+																													// modi
+																													// misteriosi
 		utenteService.inserisciNuovo(utentePerProva);
 		List<Utente> listaUtenti = utenteService.findAllCreatiAGiugno2022();
 		System.out.println(listaUtenti);
 		System.out.println(utenteService.findAllCreatiAGiugno2022());
-	
 
 		System.out.println(".......testFindAllCreatiAGiugno2022 fine: PASSED.............");
-		
+
+	}
+
+	private static void testCountAllUtentiAdmin(UtenteService utenteService) throws Exception {
+
+		System.out.println(".......countAllUtentiAdmin inizio.............");
+		System.out.println("UTENTI ADMIN: " + utenteService.countAllUtentiAdmin());
+		System.out.println(".......countAllUtentiAdmin fine: PASSED.............");
+
 	}
 
 }

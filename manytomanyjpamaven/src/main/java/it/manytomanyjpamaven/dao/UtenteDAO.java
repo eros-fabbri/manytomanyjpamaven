@@ -13,7 +13,7 @@ public interface UtenteDAO extends IBaseDAO<Utente> {
 
 	public List<Utente> findAllCreatiAGiugno2022();
 
-	public int countAllUtentiAdmin();
+	public long countAllUtentiAdmin();
 
 	public List<Utente> findAllPasswordMenoDi8Caratteri();
 

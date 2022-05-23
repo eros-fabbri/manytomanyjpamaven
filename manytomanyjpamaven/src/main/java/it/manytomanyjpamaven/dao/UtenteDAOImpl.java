@@ -3,6 +3,7 @@ package it.manytomanyjpamaven.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import it.manytomanyjpamaven.model.Ruolo;
@@ -78,9 +79,10 @@ public class UtenteDAOImpl implements UtenteDAO {
 	}
 
 	@Override
-	public int countAllUtentiAdmin() {
-
-		return 0;
+	public long countAllUtentiAdmin() {
+		Query query = entityManager
+				.createQuery("select count(*) FROM Utente u join u.ruoli r where r.codice='ROLE_ADMIN'");
+		return (long) query.getResultList().stream().findFirst().orElse(null);
 	}
 
 	@Override

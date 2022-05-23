@@ -42,6 +42,8 @@ public class ManyToManyTest {
 			testFindAllCreatiAGiugno2022(utenteServiceInstance);
 
 			testCountAllUtentiAdmin(utenteServiceInstance);
+			
+			testFindAllPasswordMenoDi8Caratteri(utenteServiceInstance);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -197,6 +199,13 @@ public class ManyToManyTest {
 		System.out.println("UTENTI ADMIN: " + utenteService.countAllUtentiAdmin());
 		System.out.println(".......countAllUtentiAdmin fine: PASSED.............");
 
+	}
+	
+	private static void testFindAllPasswordMenoDi8Caratteri(UtenteService utenteService) throws Exception{
+		System.out.println(".......countAllUtentiAdmin inizio.............");
+		List<Utente> listaUtenti = utenteService.findAllPasswordMenoDi8Caratteri();
+		System.out.println(listaUtenti);
+		System.out.println(".......countAllUtentiAdmin fine: PASSED.............");
 	}
 
 }

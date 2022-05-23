@@ -251,7 +251,6 @@ public class UtenteServiceImpl implements UtenteService {
 		}
 	}
 
-
 	@Override
 	public long countAllUtentiAdmin() throws Exception {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
@@ -274,7 +273,21 @@ public class UtenteServiceImpl implements UtenteService {
 	@Override
 	public List<Utente> findAllPasswordMenoDi8Caratteri() throws Exception {
 
-		return null;
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// uso l'injection per il dao
+			utenteDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			return utenteDAO.findAllPasswordMenoDi8Caratteri();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 	@Override

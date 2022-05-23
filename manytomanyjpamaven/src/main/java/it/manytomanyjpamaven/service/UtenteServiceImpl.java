@@ -271,7 +271,7 @@ public class UtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public List<Utente> findAllPasswordMenoDi8Caratteri() throws Exception {
+	public List<Utente> findAllConPasswordMenoDi8Caratteri() throws Exception {
 
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
@@ -280,7 +280,7 @@ public class UtenteServiceImpl implements UtenteService {
 			utenteDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
-			return utenteDAO.findAllPasswordMenoDi8Caratteri();
+			return utenteDAO.findAllConPasswordMenoDi8Caratteri();
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -29,7 +29,7 @@ public interface UtenteService {
 
 	public long countAllUtentiAdmin() throws Exception;
 
-	public List<Utente> findAllPasswordMenoDi8Caratteri() throws Exception;
+	public List<Utente> findAllConPasswordMenoDi8Caratteri() throws Exception;
 
 	public boolean controllaSeAlmenoUnoAdminTraDisabilitati() throws Exception;
 

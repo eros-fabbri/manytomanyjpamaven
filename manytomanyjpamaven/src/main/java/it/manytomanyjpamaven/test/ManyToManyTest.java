@@ -203,7 +203,7 @@ public class ManyToManyTest {
 	
 	private static void testFindAllPasswordMenoDi8Caratteri(UtenteService utenteService) throws Exception{
 		System.out.println(".......countAllUtentiAdmin inizio.............");
-		List<Utente> listaUtenti = utenteService.findAllPasswordMenoDi8Caratteri();
+		List<Utente> listaUtenti = utenteService.findAllConPasswordMenoDi8Caratteri();
 		System.out.println(listaUtenti);
 		System.out.println(".......countAllUtentiAdmin fine: PASSED.............");
 	}

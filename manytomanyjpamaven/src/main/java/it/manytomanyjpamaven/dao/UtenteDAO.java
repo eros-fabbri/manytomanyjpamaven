@@ -15,7 +15,8 @@ public interface UtenteDAO extends IBaseDAO<Utente> {
 
 	public long countAllUtentiAdmin();
 
-	public List<Utente> findAllPasswordMenoDi8Caratteri();
+	public List<Utente> findAllConPasswordMenoDi8Caratteri();
 
 	public boolean controllaSeAlmenoUnoAdminTraDisabilitati();
+
 }

@@ -94,8 +94,11 @@ public class UtenteDAOImpl implements UtenteDAO {
 
 	@Override
 	public boolean controllaSeAlmenoUnoAdminTraDisabilitati() {
-
-		return false;
+		TypedQuery<Utente> query = entityManager
+				.createQuery("select u FROM Utente u join u.ruoli r where r.codice='ROLE_ADMIN' and u.stato='DISABILITATO'", Utente.class);
+		
+		List<Utente> listaAdminDisabilitati = query.getResultList();
+		return listaAdminDisabilitati.size() > 0;
 	}
 
 	

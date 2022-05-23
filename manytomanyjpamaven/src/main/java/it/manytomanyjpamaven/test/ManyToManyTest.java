@@ -44,6 +44,10 @@ public class ManyToManyTest {
 			testCountAllUtentiAdmin(utenteServiceInstance);
 			
 			testFindAllPasswordMenoDi8Caratteri(utenteServiceInstance);
+			
+			testControllaSeAlmenoUnoAdminTraDisabilitati(utenteServiceInstance);
+			
+			testFindDescrizioniRuoliConUtentiAssociati(ruoloServiceInstance);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -195,17 +199,30 @@ public class ManyToManyTest {
 
 	private static void testCountAllUtentiAdmin(UtenteService utenteService) throws Exception {
 
-		System.out.println(".......countAllUtentiAdmin inizio.............");
+		System.out.println(".......testCountAllUtentiAdmin inizio.............");
 		System.out.println("UTENTI ADMIN: " + utenteService.countAllUtentiAdmin());
-		System.out.println(".......countAllUtentiAdmin fine: PASSED.............");
+		System.out.println(".......testCountAllUtentiAdmin fine: PASSED.............");
 
 	}
 	
 	private static void testFindAllPasswordMenoDi8Caratteri(UtenteService utenteService) throws Exception{
-		System.out.println(".......countAllUtentiAdmin inizio.............");
+		System.out.println(".......testFindAllPasswordMenoDi8Caratteri inizio.............");
 		List<Utente> listaUtenti = utenteService.findAllConPasswordMenoDi8Caratteri();
 		System.out.println(listaUtenti);
-		System.out.println(".......countAllUtentiAdmin fine: PASSED.............");
+		System.out.println(".......testFindAllPasswordMenoDi8Caratteri fine: PASSED.............");
+	}
+	
+	private static void testControllaSeAlmenoUnoAdminTraDisabilitati(UtenteService utenteService) throws Exception{
+		System.out.println(".......testControllaSeAlmenoUnoAdminTraDisabilitati inizio.............");
+		System.out.println("ALMENO UN ADMIN DISABILITATO:" + utenteService.controllaSeAlmenoUnoAdminTraDisabilitati());
+		System.out.println(".......testControllaSeAlmenoUnoAdminTraDisabilitati fine: PASSED.............");
+		
+	}
+	
+	private static void testFindDescrizioniRuoliConUtentiAssociati(RuoloService ruoloService) throws Exception{
+		System.out.println(".......testControllaSeAlmenoUnoAdminTraDisabilitati inizio.............");
+		System.out.println("DESCRIZIONI:" + ruoloService.findDescrizioniRuoliConUtentiAssociati());
+		System.out.println(".......testControllaSeAlmenoUnoAdminTraDisabilitati fine: PASSED.............");
 	}
 
 }

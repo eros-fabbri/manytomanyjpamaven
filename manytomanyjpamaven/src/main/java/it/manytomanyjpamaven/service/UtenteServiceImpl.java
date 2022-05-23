@@ -293,7 +293,21 @@ public class UtenteServiceImpl implements UtenteService {
 	@Override
 	public boolean controllaSeAlmenoUnoAdminTraDisabilitati() throws Exception {
 
-		return false;
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// uso l'injection per il dao
+			utenteDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			return utenteDAO.controllaSeAlmenoUnoAdminTraDisabilitati();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 	}
 
 }

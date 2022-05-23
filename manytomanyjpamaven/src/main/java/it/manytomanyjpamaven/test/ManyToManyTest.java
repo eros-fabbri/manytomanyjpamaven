@@ -35,6 +35,8 @@ public class ManyToManyTest {
 
 			testRimuoviRuoloDaUtente(ruoloServiceInstance, utenteServiceInstance);
 			System.out.println("In tabella Utente ci sono " + utenteServiceInstance.listAll().size() + " elementi.");
+			
+			testRimuovi(utenteServiceInstance);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -146,6 +148,21 @@ public class ManyToManyTest {
 			throw new RuntimeException("testRimuoviRuoloDaUtente fallito: ruolo ancora associato ");
 
 		System.out.println(".......testRimuoviRuoloDaUtente fine: PASSED.............");
+	}
+	
+	private static void testRimuovi(UtenteService utenteService) throws Exception {
+		System.out.println(".......testRimuovi inizio.............");
+
+		Utente utentePerProva = new Utente("mario.rossi", "password", "mario", "rossi", new Date());
+		utenteService.inserisciNuovo(utentePerProva);
+		System.out.println(utentePerProva.getRuoli());
+		utenteService.rimuovi(utentePerProva.getId());
+		if(utenteService.caricaSingoloElemento(utentePerProva.getId())!=null) {
+			throw new RuntimeException("testRimuovi fallito: utente non rimosso ");
+		}
+
+		System.out.println(".......testRimuovi fine: PASSED.............");
+		
 	}
 
 }

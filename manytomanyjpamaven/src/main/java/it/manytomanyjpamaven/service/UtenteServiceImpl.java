@@ -121,7 +121,8 @@ public class UtenteServiceImpl implements UtenteService {
 	@Override
 	public void rimuovi(Long idUtente) throws Exception {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
-		if(utenteDAO.findByIdFetchingRuoli(idUtente).getRuoli() != null) {
+		utenteDAO.setEntityManager(entityManager);
+		if(utenteDAO.findByIdFetchingRuoli(idUtente).getRuoli() == null) {
 			throw new UtenteConRuoliAssociatiException("Questo utente ha dei ruoli associati");
 		}
 
